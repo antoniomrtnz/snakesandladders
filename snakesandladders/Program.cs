@@ -20,18 +20,19 @@
             while (!hasSomeoneWon) { 
                 foreach (Player player in game.Players)
                 {
-                    int positionsToMove = game.RollDice(player);
-                    int positionAfterMoving = game.MoveToken(player, positionsToMove);
-
+                    int positionsToMove = game.RollDice(player);                    
                     Console.WriteLine("Turn for " + player.NickName + " that has got " + positionsToMove + " rolling the dice.");
-                    Console.WriteLine(player.NickName + " is now at position " + positionAfterMoving + ".");
-                    Console.WriteLine("------------------------------------------------------------------");
+
+                    game.MoveToken(player, positionsToMove);
+                    Console.WriteLine(player.NickName + " is now at position " + game.GetTokenPosition(player) + ".");
 
                     if (game.IsWinner(player))
-                    {
-                        Console.WriteLine(player.NickName + " HAS WON THE GAME!!!!.");
+                    {  
                         hasSomeoneWon = true;
+                        Console.WriteLine(player.NickName + " HAS WON THE GAME!!!!.");
                     }
+
+                    Console.WriteLine("------------------------------------------------------------------");
                 }
             }
         }
